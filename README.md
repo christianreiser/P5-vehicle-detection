@@ -48,11 +48,6 @@ This method had two downsides: First, the testing accuracy was always well above
 THe overlap between to windows is relatively big since the window moves one cell per step, only. This led to longer computing times but vewer false negatives.
 Cars are not flying, yet ;) Therefore the sliding windows were only applied to areas where cars usually are. The first windows start slightly higher than the horizon and end close to the own cars hood. 
 
-![alt text][image3]
-
-
-![alt text][image4]
----
 
 ### Video Implementation
 
