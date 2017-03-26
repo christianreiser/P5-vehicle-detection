@@ -57,7 +57,7 @@ Cars are not flying, yet ;) Therefore the sliding windows were only applied to a
 ### Video Implementation
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](https://youtu.be/FbE5LZEZ4R4)
+Here's a [link to my video result](https://youtu.be/AJiiHgcJPfY)
 
 
 ####2. In cell 8 I implemented a heatmap which should reduce the number of false positives by applying a threshold.
