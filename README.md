@@ -12,7 +12,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 [image1]: https://github.com/christianreiser/P5-vehicle-detection/blob/master/output_images/data.png
 [image2]: https://github.com/christianreiser/P5-vehicle-detection/blob/master/output_images/HOG.png
-[image3]: https://github.com/christianreiser/P5-vehicle-detection/blob/master/output_images/slide.png
+[image3]: ./examples/sliding_window.jpg
 [image4]: ./examples/sliding_window.jpg
 [image5]: https://github.com/christianreiser/P5-vehicle-detection/blob/master/output_images/heat.png
 [image6]: ./examples/labels_map.png
@@ -31,29 +31,25 @@ The code for this step is contained in the 5. code cell of the IPython notebook.
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed a images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+Here is an example using the `YCrCb` color space and HOG parameters of `orientations=10`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 
 ![alt text][image2]
 
-####2. Explain how you settled on your final choice of HOG parameters.
-I tried to systematically explore which parameters I should use. Therefore I fixed every parameter except the one I'm testing and 
+####2. How I I chose the HOG parameters.
+I tried to systematically explore which parameters I should use. Therefore I fixed every parameter except the one I testing and tried many different falues for this one parameter. Then I chose the value with the best result. I used this method for every parameter. 
+This method had two downsides: First, the testing accuracy was always well above 099 and often even 1.0. Second, I didn't try every possible parameter combination, consequently there are probably better parameters.
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
-
-I trained a linear SVM using...
+####3. I also trained my classifier in the 5th cell of th Ipython notebook and used the SVM as a linear classifier to selected the HOG features.
 
 ###Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
-
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+####1. Do detect vehicles in larger images I used the sliding window technique. It's implemented in the 7th cell and I  decided to set the scale of the windwos to one because every other value other than one led a increased number of false positives as well as false negatives. I'm not sure why, because even a value of 1.00000000001 led horrible results. 
+THe overlap between to windows is relatively big since the window moves one cell per step, only. This led to longer computing times but vewer false negatives.
+Cars are not flying, yet ;) Therefore the sliding windows were only applied to areas where cars usually are. The first windows start slightly higher than the horizon and end close to the own cars hood. 
 
 ![alt text][image3]
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
-
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
 ![alt text][image4]
 ---
