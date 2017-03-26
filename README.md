@@ -74,4 +74,4 @@ Here's an example result showing the heatmap, the result of `scipy.ndimage.measu
 ####1. Problems:
 Sometimes a car gets detected twice and the rectangles are are not overlapping. Since they are not overlapping `scipy.ndimage.measurements.label()` also plots two new rectangles on just one car. The window size is probably no small, however, bigger images lead to worse results. 
 Here is a example where the scale is set to 2:
-[image5]: https://github.com/christianreiser/P5-vehicle-detection/blob/master/output_images/size2.png
+![image5](https://github.com/christianreiser/P5-vehicle-detection/blob/master/output_images/size2.png)
