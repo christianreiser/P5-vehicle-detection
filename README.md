@@ -3,7 +3,7 @@
 
 The goals / steps of this project are the following:
 
-* Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
+* Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a Linear SVM classifier
 * Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
 * Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
 * Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
@@ -29,7 +29,7 @@ The code for this step is contained in the 5. code cell of the IPython notebook.
 
 ![alt text][image1]
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed a images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
+I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=10`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
@@ -38,7 +38,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 #### 2. How I I chose the HOG parameters.
 
-I tried to systematically explore which parameters I should use. Therefore I fixed every parameter except the one I testing and tried many different falues for this one parameter. Then I chose the value with the best result. I used this method for every parameter. 
+I tried to systematically explore which parameters I should use. Therefore I fixed every parameter except the one testing and tried many different falues for this parameter. Then I chose the value with the best result. I used this method for every parameter. 
 This method had two downsides: First, the testing accuracy was always well above 099 and often even 1.0. Second, I didn't try every possible parameter combination, consequently there are probably better parameters.
 
 #### 3. Training
@@ -49,10 +49,11 @@ I also trained my classifier in the 5th cell of th Ipython notebook and used the
 
 Do detect vehicles in larger images I used the sliding window technique. It's implemented in the 7th cell and I  decided to set the scale of the windwos to one because every other value other than one led a increased number of false positives as well as false negatives. I'm not sure why, because even a value of 1.00000000001 led horrible results. 
 The overlap between to windows is relatively big since the window moves one cell per step, only. This led to longer computing times but vewer false negatives.
+
 Cars are not flying, yet ;) Therefore the sliding windows were only applied to areas where cars usually are. The first windows start slightly higher than the horizon and end close to the own cars hood. 
 
 Promblems with the classifier and how I improved it:
-The classifier did a good job when I was training and testing with the two datasets. However, when I implemented the sliding window technique there were many false positives as well as false negatives. To reduce the number of false negatives used a bigger overlap when searching with sliding windows. To reduce the number of false positives I set the scale to one since it showd by far the best results, concearning false positives.
+The classifier did a good job when I was training and testing with the two datasets. However, when I implemented the sliding window technique there were many false positives as well as false negatives. To reduce the number of false negatives used a bigger overlap when searching with sliding windows. To reduce the number of false positives I set the scale to one since it showd by far the best results.
 Another great way to reduce the numbers of false positives is [hard negative mining](https://www.reddit.com/r/computervision/comments/2ggc5l/what_is_hard_negative_mining_and_how_is_it/). It's not implemented yet since a Udacian just told me.
 
 ### Video Implementation
